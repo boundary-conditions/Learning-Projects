@@ -8,6 +8,8 @@
         <script>
             let computerSelection;
             let playerSelection;
+            let youWin = " You Win!";
+            let youLose = " You Lose! You Loser!";
             function computerPlay() {
                 let n = Math.random();
                  if (n <= 0.33) {
@@ -19,6 +21,7 @@
                 }
             }
             function playRound(playerSelection, computerSelection) {
+                playerSelection = prompt();
                 computerSelection = computerPlay();
                 let playerVar = playerSelection.length;
                 let computerVar = computerSelection.length;
@@ -26,21 +29,21 @@
                     return "Tie Game! Play Again";
                 } else if (playerVar === 5) {
                     if (computerVar === 8) {
-                        return "Paper loses to Scissors, You Lose!";
+                        return "Scissors beat paper," + youLose;
                     } else {
-                        return "Paper beats Rock, You Win!";
+                        return "Paper beats Rock," + youWin;
                     }
                 } else if (playerVar === 8) {
                     if (computerVar === 5) {
-                        return "Scissors beat Paper, You Win!";
+                        return "Scissors beat Paper," + youWin;
                     } else {
-                        return "Scissors lose to Rock, You Lose!";
+                        return "Rock beats Scissors," + youLose;
                     }
                 } else {
                     if (computerVar === 8) {
-                        return "Rock loses to Scissors, You Lose!";
+                        return "Scissors beat Rock," + youLose;
                     } else {
-                        return "Rock beats Paper, You Win!";
+                        return "Rock beats Paper," + youWin;
                     }
                 }
                 }
