@@ -6,15 +6,47 @@
     </head>
     <body>
         <script>
+            let computerSelection;
+            let playerSelection;
             function computerPlay() {
-    let n = Math.random();
-    if (n <= 0.33) {
-        return "Rock";
-    } else if (n <= 0.67) {
-        return "Paper";
-    } else {
-        return "Scissors";
-    }}
+                let n = Math.random();
+                 if (n <= 0.33) {
+                     return "Rock";
+                } else if (n <= 0.67) {
+                    return "Paper";
+                } else {
+                    return "Scissors";
+                }
+            }
+            function playRound(playerSelection, computerSelection) {
+                computerSelection = computerPlay();
+                let playerVar = playerSelection.length;
+                let computerVar = computerSelection.length;
+                if (playerVar === computerVar) {
+                    return "Tie Game! Play Again";
+                } else if (playerVar === 5) {
+                    if (computerVar === 8) {
+                        return "Paper loses to Scissors, You Lose!";
+                    } else {
+                        return "Paper beats Rock, You Win!";
+                    }
+                } else if (playerVar === 8) {
+                    if (computerVar === 5) {
+                        return "Scissors beat Paper, You Win!";
+                    } else {
+                        return "Scissors lose to Rock, You Lose!";
+                    }
+                } else {
+                    if (computerVar === 8) {
+                        return "Rock loses to Scissors, You Lose!";
+                    } else {
+                        return "Rock beats Paper, You Win!";
+                    }
+                }
+                }
+            
+
+
         </script>
     </body>
 </html>
