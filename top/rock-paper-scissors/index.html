@@ -24,7 +24,12 @@
                 }
             }
             function playRound(playerSelection, computerSelection) {
-                playerSelection = prompt();
+                let weaponPick = prompt('Pick a weapon:');
+                if (weaponPick.toLowerCase() === "rock" || "paper " || "scissors") {
+                    weaponPick = playerSelection;
+                } else {
+                    return prompt('Pick a weapon:');
+                }
                 computerSelection = computerPlay();
                 let playerVar = playerSelection.length;
                 let computerVar = computerSelection.length;
