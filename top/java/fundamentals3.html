@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page Title</title>
+  <meta charset="UTF-8"/>
+</head>
+<body>
+  <script>
+    function add7(num1) {
+      let num2 = num1 + 7;
+      return num2;
+    }
+    
+    function multiply(num1, num2) {
+      let num3 = num1 * num2;
+      return num3;
+    }
+
+    function capitalize(x) {
+      let string2 = x.toLowerCase();
+      let str1 = x.slice(0,1);
+      string2 = string2.slice(1);
+      str1 = str1.toUpperCase();
+      let newString = str1 + string2;
+      return newString;
+    }
+
+    function lastLetter(x) {
+      let stringLenth = x.length;
+      let newString = x.slice(stringLenth-1);
+      return newString;
+
+    }
+  </script>
+</body>
+</html>
