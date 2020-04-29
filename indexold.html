@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock Paper Scissors v1</title>
+        
+    </head>
+    <body>
+        <button onclick="game()">Play Me!</button>
+        <script>
+            let computerSelection;
+            let playerSelection;
+            let youWin = " You Win!";
+            let youLose = " You Lose! You Loser!";
+            let playerScore = 0;
+            let computerScore = 0;
+            function computerPlay() {
+                let n = Math.random();
+                 if (n <= 0.33) {
+                     return "Rock";
+                } else if (n <= 0.67) {
+                    return "Paper";
+                } else {
+                    return "Scissors";
+                }
+            }
+            function playRound(playerSelection, computerSelection) {
+                playerSelection = prompt('Pick a weapon:');
+                computerSelection = computerPlay();
+                let playerVar = playerSelection.length;
+                let computerVar = computerSelection.length;
+                if (playerVar === computerVar) {
+                    return "Tie Game! Play Again";
+                } else if (playerVar === 5) {
+                    if (computerVar === 8) {
+                        computerScore++;
+                        return "Scissors beat paper," + youLose;
+                    } else {
+                        playerScore++;
+                        return "Paper beats Rock," + youWin;
+                    }
+                } else if (playerVar === 8) {
+                    if (computerVar === 5) {
+                        playerScore++;
+                        return "Scissors beat Paper," + youWin;
+                    } else {
+                        computerScore++;
+                        return "Rock beats Scissors," + youLose;
+                    }
+                } else {
+                    if (computerVar === 8) {
+                        computerScore++;
+                        return "Scissors beat Rock," + youLose;
+                    } else {
+                        playerScore++;
+                        return "Rock beats Paper," + youWin;
+                    }
+                }
+                }
+            
+            function game() {
+                console.log(playRound());
+                console.log(playRound());
+                console.log(playRound());
+                console.log(playRound());
+                console.log(playRound());
+                console.log(finalScore());
+            }
+            function finalScore() {
+                if (playerScore > computerScore) {
+                    return "You Win!";
+                } else {
+                    return "You Lose! Even when you tie, you LOSE!";
+                }
+            }
+            
+
+
+        </script>
+    </body>
+</html>

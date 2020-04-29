@@ -1,80 +1,168 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Rock Paper Scissors v1</title>
+        <title>Rock Paper Scissors V2</title>
+        <meta charset="utf-8">
+        <link href="https://fonts.googleapis.com/css2?family=Domine:wght@700&family=Inconsolata&family=Poppins&display=swap" rel="stylesheet">
+        <link href="style.css" rel="stylesheet">
         
     </head>
     <body>
-        <button onclick="game()">Play Me!</button>
+        <header>
+            <h2 id="header">Rock Paper Scissors</h2>
+        </header>
+        <main id="main" class="main">
+            <button class="playtile" id="rock" onclick="playRound('rock', computerPlay()), buttonEvent(rockSound)">
+                <span class="number">137</span></br>
+                <span class="letter">R</span></br>
+                <span class="name">rock</span></br>
+            </button>
+            <button class="playtile" id="paper" onclick="playRound('paper', computerPlay()), buttonEvent(paperSound)">
+                <span class="number">465</span></br>
+                <span class="letter">P</span></br>
+                <span class="name">paper</span></br>
+            </button>
+            <button class="playtile" id="scissors"onclick="playRound('scissors', computerPlay()), buttonEvent(scissorsSound)">
+                <span class="number">717</span></br>
+                <span class="letter">S</span></br>
+                <span class="name">scissors</span></br>
+            </button>
+            <div id="vs">
+                <p>vs.</p>
+            </div>
+            <button class="cputile" id="cpuplay">
+                <span class="number" id="cpunumber">0010100</span></br>
+                <span class="letter" id="cpuletter">?</span></br>
+                <span class="name" id="cpuname">computer</span></br>
+            </button>
+        </main>
+        <main id="finalmain" class="main"></main>
+        <footer id="footer">
+            <p id="playerscore">-</p>
+            <p id="winlose">Choose your weapon!</p>
+            <p id="cpuscore">-</p>
+        </footer>
+
+        <audio id="rocksound" src="rock_1.wav"></audio>
+        <audio id="papersound" src="paper_1.wav"></audio>
+        <audio id="scissorssound" src="scissors_1.wav"></audio>
+        <audio id="winnersound" src="winner.wav"></audio>
+        <audio id="losersound" src="loser.wav"></audio>
+
         <script>
+            const rockSound = document.getElementById('rocksound');
+            const paperSound = document.getElementById('papersound');
+            const scissorsSound = document.getElementById('scissorssound');
+            const winnerSound = document.getElementById('winnersound');
+            const loserSound = document.getElementById('losersound');
+            
+            const rockTile = document.getElementById('rock');
+            const paperTile = document.getElementById('paper');
+            const scissorsTile = document.getElementById('scissors');
+            let cpuNumber = document.getElementById('cpunumber');
+            let cpuLetter = document.getElementById('cpuletter');
+            let cpuName = document.getElementById('cpuname');
+            let winLose = document.getElementById('winlose');
+            let playerScoreboard = document.getElementById('playerscore');
+            let cpuScoreboard = document.getElementById('cpuscore');
+            let mainVar = document.getElementById('main');
+            const finalMain = document.getElementById('finalmain');
+            
+            
+            
             let computerSelection;
             let playerSelection;
-            let youWin = " You Win!";
-            let youLose = " You Lose! You Loser!";
             let playerScore = 0;
             let computerScore = 0;
+
             function computerPlay() {
                 let n = Math.random();
                  if (n <= 0.33) {
-                     return "Rock";
+                    cpuNumber.innerHTML = '137';
+                    cpuName.innerHTML = 'rock';
+                    cpuLetter.innerHTML = 'R';
+                    return "Rock";      
                 } else if (n <= 0.67) {
+                    cpuNumber.innerHTML = '465';
+                    cpuName.innerHTML = 'paper';
+                    cpuLetter.innerHTML = 'P';
                     return "Paper";
                 } else {
+                    cpuNumber.innerHTML = '717';
+                    cpuName.innerHTML = 'scissors';
+                    cpuLetter.innerHTML = 'S';
                     return "Scissors";
                 }
             }
+
             function playRound(playerSelection, computerSelection) {
-                playerSelection = prompt('Pick a weapon:');
-                computerSelection = computerPlay();
+                /* playerSelection = prompt('Pick a weapon:');
+                computerSelection = computerPlay(); */
                 let playerVar = playerSelection.length;
                 let computerVar = computerSelection.length;
                 if (playerVar === computerVar) {
-                    return "Tie Game! Play Again";
+                        scoreBoard(0,0);
+                        winLose.innerHTML = "Tie!";
                 } else if (playerVar === 5) {
                     if (computerVar === 8) {
-                        computerScore++;
-                        return "Scissors beat paper," + youLose;
+                        scoreBoard(0,1);
+                        winLose.innerHTML = "Loser!";
                     } else {
-                        playerScore++;
-                        return "Paper beats Rock," + youWin;
+                        //playerScore++;
+                        scoreBoard(1,0);
+                        winLose.innerHTML = "Winner!";
                     }
                 } else if (playerVar === 8) {
                     if (computerVar === 5) {
-                        playerScore++;
-                        return "Scissors beat Paper," + youWin;
+                        //playerScore++;
+                        scoreBoard(1,0);
+                        winLose.innerHTML = "Winner!"
                     } else {
-                        computerScore++;
-                        return "Rock beats Scissors," + youLose;
+                        //computerScore++;
+                        scoreBoard(0,1);
+                        winLose.innerHTML = "Loser!";
                     }
                 } else {
                     if (computerVar === 8) {
-                        computerScore++;
-                        return "Scissors beat Rock," + youLose;
+                        //computerScore++;
+                        scoreBoard(1,0);
+                        winLose.innerHTML = "Winner!";
                     } else {
-                        playerScore++;
-                        return "Rock beats Paper," + youWin;
+                        //playerScore++;
+                        scoreBoard(0,1);
+                        winLose.innerHTML = "Loser!"
                     }
                 }
                 }
-            
-            function game() {
-                console.log(playRound());
-                console.log(playRound());
-                console.log(playRound());
-                console.log(playRound());
-                console.log(playRound());
-                console.log(finalScore());
+
+            function buttonEvent(x) {
+                x.play();
+
+                
             }
-            function finalScore() {
-                if (playerScore > computerScore) {
-                    return "You Win!";
-                } else {
-                    return "You Lose! Even when you tie, you LOSE!";
+            
+            function scoreBoard(x,y) {
+                playerScore = playerScore + x;
+                computerScore = computerScore + y;
+                //let p = playerScore.toString();
+                //let c = computerScore.toString();
+                playerScoreboard.innerText = playerScore.toString();
+                cpuScoreboard.innerText = computerScore.toString();
+                if (playerScore === 5 || computerScore === 5) {
+                    if (playerScore > computerScore) {
+                        winnerSound.play();
+                    } else {
+                        loserSound.play();
+                    }
+                    mainVar.style.display = 'none';
+                    finalMain.style.display = 'flex';
+                    finalMain.innerHTML = 'GAME OVER FOOL!';
+
                 }
+                console.log(playerScore,computerScore);
             }
-            
 
-
-        </script>
+        </script>        
     </body>
+
 </html>
